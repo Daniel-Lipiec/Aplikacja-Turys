@@ -4,4 +4,10 @@
     <string name="email_incorrect_toast">email niepoprawny lub konto nie istnieje</string>
     <string name="email_in_use_toast">Konto już istnieje</string>
     <string name="passwords_not_same_toast">hasła muszą być takie same</string>
+    <string name="email">email</string>
+    <string name="has_o">hasło</string>
+    <string name="repeat_password">powtórz hasło</string>
+    <string name="Register">Rejestruj</string>
+    <string name="login">Logowanie</string>
+    <string name="logo">Logo</string>
 </resources>

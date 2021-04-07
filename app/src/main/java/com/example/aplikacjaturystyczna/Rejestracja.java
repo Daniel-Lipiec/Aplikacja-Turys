@@ -33,7 +33,7 @@ public class Rejestracja extends AppCompatActivity implements View.OnClickListen
                 EditText password_textbox_second = (EditText) findViewById(R.id.editTextTextPassword);
                 String password_repeat = password_textbox_second.getText().toString();
 
-                if (/* email istnieje w bazie danych */)
+                if (/* czy email istnieje w bazie danych */)
                     Toast.makeText(this, R.string.email_in_use_toast, Toast.LENGTH_SHORT).show();
                 else
                 {
