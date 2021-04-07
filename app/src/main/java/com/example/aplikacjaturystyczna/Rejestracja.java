@@ -28,16 +28,17 @@ public class Rejestracja extends AppCompatActivity implements View.OnClickListen
 
                 EditText textbox_login = (EditText) findViewById(R.id.editTextTextEmailAddress);
                 String email = textbox_login.getText().toString();
-                EditText password_textbox = (EditText) findViewById(R.id.editTextTextPassword);
+                EditText password_textbox = (EditText) findViewById(R.id.editTextTextPassword2);
                 String password = password_textbox.getText().toString();
-                EditText password_textbox_second = (EditText) findViewById(R.id.editTextTextPassword);
+                EditText password_textbox_second = (EditText) findViewById(R.id.editTextTextPassword3);
                 String password_repeat = password_textbox_second.getText().toString();
+
 
                 if (/* czy email istnieje w bazie danych */)
                     Toast.makeText(this, R.string.email_in_use_toast, Toast.LENGTH_SHORT).show();
                 else
                 {
-                    if(password == password_repeat)
+                    if(password.equals(password_repeat) )
                     {
                         //dodanie konta do bazy danych
                         startActivity(new Intent(this, MainActivity.class));
