@@ -40,8 +40,9 @@ public class Logowanie extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button15:
-                rootNode = FirebaseDatabase.getInstance();
+                rootNode = FirebaseDatabase.getInstance("https://aplikacja-turystyczna-1720e-default-rtdb.firebaseio.com/");
                 reference =rootNode.getReference("users");
+
 
                 EditText textbox = (EditText)findViewById(R.id.editTextTextEmailAddress);
                 email = textbox.getText().toString();
@@ -51,7 +52,7 @@ public class Logowanie extends AppCompatActivity implements View.OnClickListener
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String hashDB = dataSnapshot.child(email).child("pwdHashCode").getValue().toString();
+                        String hashDB = dataSnapshot.child(String.valueOf(email.hashCode())).child("pwdHashCode").getValue().toString();
                         hashFromDB = Integer.parseInt(hashDB);
                     }
 
@@ -61,7 +62,9 @@ public class Logowanie extends AppCompatActivity implements View.OnClickListener
                     }
                 });
 
-                if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && userCheck) {
+
+
+                if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                    if (password.hashCode() == hashFromDB) {
                        startActivity(new Intent(this, main_menu.class));
                     } else

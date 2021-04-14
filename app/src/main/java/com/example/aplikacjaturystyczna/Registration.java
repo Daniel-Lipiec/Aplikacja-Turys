@@ -19,13 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class Rejestracja extends AppCompatActivity implements View.OnClickListener {
+public class Registration extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    EditText textbox_login = (EditText) findViewById(R.id.editTextTextEmailAddress);
-    EditText password_textbox = (EditText) findViewById(R.id.editTextTextPassword2);
-    EditText password_textbox_second = (EditText) findViewById(R.id.editTextTextPassword3);
+
     boolean userExists;
 
     @Override
@@ -43,12 +41,15 @@ public class Rejestracja extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button16:
-                rootNode = FirebaseDatabase.getInstance();
+                rootNode = FirebaseDatabase.getInstance("https://aplikacja-turystyczna-1720e-default-rtdb.firebaseio.com/");
                 reference =rootNode.getReference("users");
-
+                EditText textbox_login = (EditText) findViewById(R.id.editTextTextEmailAddress);
+                EditText password_textbox = (EditText) findViewById(R.id.editTextTextPassword2);
+                EditText password_textbox_second = (EditText) findViewById(R.id.editTextTextPassword3);
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        EditText textbox_login = (EditText) findViewById(R.id.editTextTextEmailAddress);
                         String email_check = textbox_login.getText().toString();
                         if(dataSnapshot.hasChild(String.valueOf(email_check.hashCode())))
                             userExists = true;
@@ -73,6 +74,7 @@ public class Rejestracja extends AppCompatActivity implements View.OnClickListen
                         Toast.makeText(this, R.string.email_in_use_toast, Toast.LENGTH_SHORT).show();
                     else {
                         if (password.equals(password_repeat)) {
+                            Toast.makeText(this, R.string.registered_toast, Toast.LENGTH_SHORT).show();
                             reference.child(email).setValue(user);
                             startActivity(new Intent(this, MainActivity.class));
                         } else
@@ -81,7 +83,7 @@ public class Rejestracja extends AppCompatActivity implements View.OnClickListen
                 }
                 else
                     Toast.makeText(this, R.string.wrong_email_format, Toast.LENGTH_SHORT).show();
-                    break;
+                break;
 
         }
     }
